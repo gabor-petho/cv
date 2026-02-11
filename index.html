@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pethő Gábor - CV</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --transition: 0.3s ease;
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f5;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --accent: #2563eb;
+      --accent-light: #dbeafe;
+      --border: #e0e0e0;
+      --tag-bg: #f0f0f0;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f0f;
+      --bg-card: #1a1a1a;
+      --text: #e5e5e5;
+      --text-muted: #999;
+      --accent: #3b82f6;
+      --accent-light: #1e293b;
+      --border: #2a2a2a;
+      --tag-bg: #252525;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Controls */
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 100;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .ctrl-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: background var(--transition), border-color var(--transition);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .ctrl-btn:hover { border-color: var(--accent); }
+
+    .lang-btn {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      margin-bottom: 1rem;
+      transition: border-color var(--transition);
+    }
+
+    .profile-pic-placeholder {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid var(--border);
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-light);
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .header-name h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .header-name .subtitle {
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+
+    .contact-info {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.15rem 1.25rem;
+      margin-top: 0.75rem;
+    }
+
+    .contact-info a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .contact-info a:hover { text-decoration: underline; }
+
+    /* About */
+    .about {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 1.75rem;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Experience items */
+    .exp-item {
+      margin-bottom: 1rem;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .exp-company {
+      color: var(--accent);
+    }
+
+    .exp-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .exp-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 0.5rem;
+      margin-top: 0.35rem;
+    }
+
+    .exp-list li {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: var(--tag-bg);
+      padding: 0.15rem 0.55rem;
+      border-radius: 3px;
+    }
+
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .skill-group h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      background: var(--tag-bg);
+      color: var(--text-muted);
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    /* Education */
+    .edu-item {
+      margin-bottom: 0.75rem;
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .edu-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .edu-degree {
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .edu-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .edu-topics {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Languages & Other */
+    .lang-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      padding: 0.2rem 0;
+    }
+
+    .lang-level {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    /* Two-column layout for bottom sections */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container { padding: 1.25rem 1rem; }
+
+      .profile-pic,
+      .profile-pic-placeholder {
+        width: 100px;
+        height: 100px;
+        font-size: 2rem;
+      }
+
+      .header-name h1 { font-size: 1.6rem; }
+
+      .skills-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+
+      .exp-header,
+      .edu-header {
+        flex-direction: column;
+        gap: 0.1rem;
+      }
+
+      .controls {
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+
+      .ctrl-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+
+      .lang-btn { font-size: 0.6rem; }
+    }
+
+    @media print {
+      .controls { display: none; }
+      body { background: #fff; color: #000; }
+      .tag, .exp-list li { border-color: #ccc; background: #f5f5f5; color: #333; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="ctrl-btn lang-btn" onclick="toggleLang()" aria-label="Switch language">
+    <span id="lang-label">HU</span>
+  </button>
+  <button class="ctrl-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+    <span id="theme-icon">&#9788;</span>
+  </button>
+</div>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <img class="profile-pic" src="photo.jpg" alt="Pethő Gábor"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="profile-pic-placeholder" style="display:none;">PG</div>
+    <div class="header-name">
+      <h1 data-i18n="name">Gabor Petho</h1>
+      <div class="subtitle" data-i18n="subtitle">Robotics Team Leader | Mechatronics Engineer</div>
+    </div>
+    <div class="contact-info">
+      <span data-i18n="location">Budapest, Hungary</span>
+      <span>+36 30 837 5057</span>
+      <a href="mailto:petgab@proton.me">petgab@proton.me</a>
+      <a href="https://linkedin.com/in/gabor-petho" target="_blank">linkedin.com/in/gabor-petho</a>
+      <a href="https://github.com/gabor-petho" target="_blank">github.com/gabor-petho</a>
+    </div>
+  </header>
+
+  <!-- About -->
+  <p class="about" data-i18n="about">Engineering leader dedicated to bridging the gap between digital automation and physical manufacturing. Building functional machinery through 3D design and robotics, leveraging full-stack development and AI to streamline complex workflows and drive efficiency on the shop floor.</p>
+
+  <!-- Work Experience -->
+  <section class="section">
+    <h2 class="section-title" data-i18n="sec_exp">Work Experience</h2>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" data-i18n="exp1a_title">Robotics Team Leader &mdash; <span class="exp-company">Polinvent Kft.</span></div>
+        <span class="exp-date" data-i18n="exp1a_date">Jan 2025 &ndash; Present</span>
+      </div>
+      <ul class="exp-list">
+        <li data-i18n="exp1a_1">Leading 15+ member multidisciplinary robotics team</li>
+        <li data-i18n="exp1a_2">Cutting-edge R&D projects & custom equipment development</li>
+        <li data-i18n="exp1a_3">Automation of complex technological workflows</li>
+        <li data-i18n="exp1a_4">Facility infrastructure management</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" data-i18n="exp1b_title">R&D Engineer &mdash; <span class="exp-company">Polinvent Kft.</span></div>
+        <span class="exp-date" data-i18n="exp1b_date">Jun 2020 &ndash; Jan 2025</span>
+      </div>
+      <ul class="exp-list">
+        <li data-i18n="exp1b_1">IoT development & Industry 4.0 integration</li>
+        <li data-i18n="exp1b_2">Robot programming & robot-supported processes</li>
+        <li data-i18n="exp1b_3">Full-stack web development</li>
+        <li data-i18n="exp1b_4">3D prototype design & UV curing machine development</li>
+        <li data-i18n="exp1b_5">Production support & process improvements</li>
+        <li data-i18n="exp1b_6">SMT / PCB design & rework</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" data-i18n="exp2_title">Process Engineer Specialist &mdash; <span class="exp-company">Robert Bosch Elektronika Kft.</span></div>
+        <span class="exp-date" data-i18n="exp2_date">Nov 2015 &ndash; May 2020</span>
+      </div>
+      <ul class="exp-list">
+        <li data-i18n="exp2_1">New machine installation & production line relocation</li>
+        <li data-i18n="exp2_2">TPM & MB maintenance & operation support</li>
+        <li data-i18n="exp2_3">SMT line segment lead</li>
+        <li data-i18n="exp2_4">Control Plan & FMEA support</li>
+        <li data-i18n="exp2_5">KPI reporting & area budget monitoring</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" data-i18n="exp3_title">Plant Engineer &mdash; <span class="exp-company">Teva Pharmaceuticals</span></div>
+        <span class="exp-date" data-i18n="exp3_date">Apr 2015 &ndash; Oct 2015</span>
+      </div>
+      <ul class="exp-list">
+        <li data-i18n="exp3_1">Technician work organization</li>
+        <li data-i18n="exp3_2">GMP-based production support</li>
+        <li data-i18n="exp3_3">TPM & maintenance control</li>
+        <li data-i18n="exp3_4">Spare part management</li>
+        <li data-i18n="exp3_5">PLC programming & AutoCAD design</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" data-i18n="exp4_title">Maintenance Engineer &mdash; <span class="exp-company">Hankook Tire</span></div>
+        <span class="exp-date" data-i18n="exp4_date">Apr 2013 &ndash; Jan 2015</span>
+      </div>
+      <ul class="exp-list">
+        <li data-i18n="exp4_1">Electrical & mechanical machine maintenance</li>
+        <li data-i18n="exp4_2">Leading maintenance technicians (10+)</li>
+        <li data-i18n="exp4_3">New production line development</li>
+        <li data-i18n="exp4_4">PLC programming & mechanical part design</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" data-i18n="exp5_title">Trainee &mdash; <span class="exp-company">Bosch</span></div>
+        <span class="exp-date" data-i18n="exp5_date">Sep 2011 &ndash; Mar 2013</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section">
+    <h2 class="section-title" data-i18n="sec_skills">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3 data-i18n="sk_prog">Programming & Web</h3>
+        <div class="tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">React</span>
+          <span class="tag">HTML</span>
+          <span class="tag">C++</span>
+          <span class="tag">Arduino</span>
+          <span class="tag">Prompt Engineering</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 data-i18n="sk_elec">Electrical & Automation</h3>
+        <div class="tags">
+          <span class="tag">PLC Programming</span>
+          <span class="tag">RPA</span>
+          <span class="tag">E-Plan</span>
+          <span class="tag">HMI</span>
+          <span class="tag">IoT Integration</span>
+          <span class="tag">Soldering</span>
+          <span class="tag">Wire Installation</span>
+          <span class="tag">Component Design</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 data-i18n="sk_eng">Engineering & Design</h3>
+        <div class="tags">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">AutoCAD</span>
+          <span class="tag">3D Printing</span>
+          <span class="tag">Hydraulics</span>
+          <span class="tag">Pneumatics</span>
+          <span class="tag">SMT / PCB</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3 data-i18n="sk_mgmt">Management & Tools</h3>
+        <div class="tags">
+          <span class="tag">Team Leadership</span>
+          <span class="tag">SAP</span>
+          <span class="tag">Oracle</span>
+          <span class="tag">TPM</span>
+          <span class="tag">KPI Reporting</span>
+          <span class="tag">Quality Methods</span>
+          <span class="tag">MS Office Suite</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education + Languages side by side -->
+  <div class="two-col">
+    <section class="section">
+      <h2 class="section-title" data-i18n="sec_edu">Education</h2>
+
+      <div class="edu-item">
+        <div class="edu-header">
+          <div>
+            <div class="edu-title" data-i18n="edu1_school">College of Dunaújváros</div>
+            <div class="edu-degree" data-i18n="edu1_degree">Tire Industry Engineer BSc</div>
+          </div>
+          <span class="edu-date">2013 &ndash; 2014</span>
+        </div>
+        <div class="edu-topics" data-i18n="edu1_topics">Tire industry machines, production logic, rubber analysis</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-header">
+          <div>
+            <div class="edu-title" data-i18n="edu2_school">University of Miskolc</div>
+            <div class="edu-degree" data-i18n="edu2_degree">Mechatronics Engineer BSc</div>
+          </div>
+          <span class="edu-date">2007 &ndash; 2012</span>
+        </div>
+        <div class="edu-topics" data-i18n="edu2_topics">Automation, industrial communication, robotics, modelling & simulation</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" data-i18n="sec_lang">Languages</h2>
+      <div class="lang-row">
+        <span><strong data-i18n="lang_en">English</strong></span>
+        <span class="lang-level" data-i18n="lang_en_lvl">Fluent &mdash; daily use</span>
+      </div>
+      <div class="lang-row">
+        <span><strong data-i18n="lang_de">German</strong></span>
+        <span class="lang-level" data-i18n="lang_de_lvl">Communication level</span>
+      </div>
+
+      <h2 class="section-title" style="margin-top: 1.25rem;" data-i18n="sec_other">Other</h2>
+      <div class="lang-row">
+        <span data-i18n="driving">Driving Licence</span>
+        <span class="lang-level">A & B</span>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<script>
+  const i18n = {
+    en: {
+      name: 'Gabor Petho',
+      subtitle: 'Robotics Team Leader | Mechatronics Engineer',
+      location: 'Budapest, Hungary',
+      about: 'Engineering leader dedicated to bridging the gap between digital automation and physical manufacturing. Building functional machinery through 3D design and robotics, leveraging full-stack development and AI to streamline complex workflows and drive efficiency on the shop floor.',
+      sec_exp: 'Work Experience',
+      exp1a_title: 'Robotics Team Leader \u2014 <span class="exp-company">Polinvent Kft.</span>',
+      exp1a_date: 'Jan 2025 \u2013 Present',
+      exp1a_1: 'Leading 15+ member multidisciplinary robotics team',
+      exp1a_2: 'Cutting-edge R&D projects & custom equipment development',
+      exp1a_3: 'Automation of complex technological workflows',
+      exp1a_4: 'Facility infrastructure management',
+      exp1b_title: 'R&D Engineer \u2014 <span class="exp-company">Polinvent Kft.</span>',
+      exp1b_date: 'Jun 2020 \u2013 Jan 2025',
+      exp1b_1: 'IoT development & Industry 4.0 integration',
+      exp1b_2: 'Robot programming & robot-supported processes',
+      exp1b_3: 'Full-stack web development',
+      exp1b_4: '3D prototype design & UV curing machine development',
+      exp1b_5: 'Production support & process improvements',
+      exp1b_6: 'SMT / PCB design & rework',
+      exp2_title: 'Process Engineer Specialist \u2014 <span class="exp-company">Robert Bosch Elektronika Kft.</span>',
+      exp2_date: 'Nov 2015 \u2013 May 2020',
+      exp2_1: 'New machine installation & production line relocation',
+      exp2_2: 'TPM & MB maintenance & operation support',
+      exp2_3: 'SMT line segment lead',
+      exp2_4: 'Control Plan & FMEA support',
+      exp2_5: 'KPI reporting & area budget monitoring',
+      exp3_title: 'Plant Engineer \u2014 <span class="exp-company">Teva Pharmaceuticals</span>',
+      exp3_date: 'Apr 2015 \u2013 Oct 2015',
+      exp3_1: 'Technician work organization',
+      exp3_2: 'GMP-based production support',
+      exp3_3: 'TPM & maintenance control',
+      exp3_4: 'Spare part management',
+      exp3_5: 'PLC programming & AutoCAD design',
+      exp4_title: 'Maintenance Engineer \u2014 <span class="exp-company">Hankook Tire</span>',
+      exp4_date: 'Apr 2013 \u2013 Jan 2015',
+      exp4_1: 'Electrical & mechanical machine maintenance',
+      exp4_2: 'Leading maintenance technicians (10+)',
+      exp4_3: 'New production line development',
+      exp4_4: 'PLC programming & mechanical part design',
+      exp5_title: 'Trainee \u2014 <span class="exp-company">Bosch</span>',
+      exp5_date: 'Sep 2011 \u2013 Mar 2013',
+      sec_skills: 'Skills',
+      sk_prog: 'Programming & Web',
+      sk_elec: 'Electrical & Automation',
+      sk_eng: 'Engineering & Design',
+      sk_mgmt: 'Management & Tools',
+      sec_edu: 'Education',
+      edu1_school: 'College of Dunaújváros',
+      edu1_degree: 'Tire Industry Engineer BSc',
+      edu1_topics: 'Tire industry machines, production logic, rubber analysis',
+      edu2_school: 'University of Miskolc',
+      edu2_degree: 'Mechatronics Engineer BSc',
+      edu2_topics: 'Automation, industrial communication, robotics, modelling & simulation',
+      sec_lang: 'Languages',
+      lang_en: 'English',
+      lang_en_lvl: 'Fluent \u2014 daily use',
+      lang_de: 'German',
+      lang_de_lvl: 'Communication level',
+      sec_other: 'Other',
+      driving: 'Driving Licence'
+    },
+    hu: {
+      name: 'Pethő Gábor',
+      subtitle: 'Robotika csapatvezető | Mechatronikai mérnök',
+      location: 'Budapest, Magyarország',
+      about: 'Mérnöki vezető, elkötelezett a digitális automatizálás és a fizikai gyártás közötti szakadék áthidalása iránt. Működő gépek építése 3D tervezéssel és robotikával, full-stack fejlesztés és MI alkalmazása komplex munkafolyamatok egyszerűsítésére és a gyártási hatékonyság növelésére.',
+      sec_exp: 'Munkatapasztalat',
+      exp1a_title: 'Robotika csapatvezető \u2014 <span class="exp-company">Polinvent Kft.</span>',
+      exp1a_date: '2025. jan. \u2013 Jelenleg',
+      exp1a_1: '15+ fős multidiszciplináris robotika csapat vezetése',
+      exp1a_2: 'K+F projektek és egyedi berendezések fejlesztése',
+      exp1a_3: 'Komplex technológiai munkafolyamatok automatizálása',
+      exp1a_4: 'Létesítmény-infrastruktúra menedzsment',
+      exp1b_title: 'K+F mérnök \u2014 <span class="exp-company">Polinvent Kft.</span>',
+      exp1b_date: '2020. jún. \u2013 2025. jan.',
+      exp1b_1: 'IoT fejlesztés és Ipar 4.0 integráció',
+      exp1b_2: 'Robot programozás és robot-támogatott folyamatok',
+      exp1b_3: 'Full-stack webfejlesztés',
+      exp1b_4: '3D prototípus tervezés és UV térhálósító gép fejlesztés',
+      exp1b_5: 'Gyártástámogatás és folyamatfejlesztés',
+      exp1b_6: 'SMT / PCB tervezés és javítás',
+      exp2_title: 'Folyamatmérnök specialista \u2014 <span class="exp-company">Robert Bosch Elektronika Kft.</span>',
+      exp2_date: '2015. nov. \u2013 2020. máj.',
+      exp2_1: 'Új gépek telepítése és gyártósorok áthelyezése',
+      exp2_2: 'TPM és MB karbantartás és üzemeltetési támogatás',
+      exp2_3: 'SMT vonalszegmens vezetés',
+      exp2_4: 'Ellenőrzési terv és FMEA támogatás',
+      exp2_5: 'KPI riportálás és területi költségvetés felügyelete',
+      exp3_title: 'Üzemmérnök \u2014 <span class="exp-company">Teva Pharmaceuticals</span>',
+      exp3_date: '2015. ápr. \u2013 2015. okt.',
+      exp3_1: 'Technikusok munkaszervezése',
+      exp3_2: 'GMP alapú gyártástámogatás',
+      exp3_3: 'TPM és karbantartás-felügyelet',
+      exp3_4: 'Alkatrész-gazdálkodás',
+      exp3_5: 'PLC programozás és AutoCAD tervezés',
+      exp4_title: 'Karbantartó mérnök \u2014 <span class="exp-company">Hankook Tire</span>',
+      exp4_date: '2013. ápr. \u2013 2015. jan.',
+      exp4_1: 'Elektromos és mechanikai gépkarbantartás',
+      exp4_2: 'Karbantartó technikusok vezetése (10+ fő)',
+      exp4_3: 'Új gyártósor fejlesztése',
+      exp4_4: 'PLC programozás és mechanikai alkatrész tervezés',
+      exp5_title: 'Gyakornok \u2014 <span class="exp-company">Bosch</span>',
+      exp5_date: '2011. szept. \u2013 2013. márc.',
+      sec_skills: 'Kompetenciák',
+      sk_prog: 'Programozás & Web',
+      sk_elec: 'Elektromos & Automatizálás',
+      sk_eng: 'Mérnöki & Tervezés',
+      sk_mgmt: 'Menedzsment & Eszközök',
+      sec_edu: 'Tanulmányok',
+      edu1_school: 'Dunaújvárosi Főiskola',
+      edu1_degree: 'Gumiipari mérnök BSc',
+      edu1_topics: 'Gumiipari gépek, gyártási logika, gumielemzés',
+      edu2_school: 'Miskolci Egyetem',
+      edu2_degree: 'Mechatronikai mérnök BSc',
+      edu2_topics: 'Automatizálás, ipari kommunikáció, robotika, modellezés és szimuláció',
+      sec_lang: 'Nyelvtudás',
+      lang_en: 'Angol',
+      lang_en_lvl: 'Tárgyalási szintű \u2014 napi használat',
+      lang_de: 'Német',
+      lang_de_lvl: 'Középfokú (passzív)',
+      sec_other: 'Egyéb',
+      driving: 'Jogosítvány'
+    }
+  };
+
+  function applyLang(lang) {
+    const strings = i18n[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (strings[key] !== undefined) el.innerHTML = strings[key];
+    });
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.getElementById('lang-label').textContent = lang === 'en' ? 'HU' : 'EN';
+  }
+
+  function toggleLang() {
+    const current = document.documentElement.getAttribute('data-lang') || 'en';
+    const next = current === 'en' ? 'hu' : 'en';
+    applyLang(next);
+    localStorage.setItem('lang', next);
+  }
+
+  function toggleTheme() {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    document.getElementById('theme-icon').innerHTML = next === 'dark' ? '&#9788;' : '&#9790;';
+    localStorage.setItem('theme', next);
+  }
+
+  // Restore saved preferences
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-icon').innerHTML = savedTheme === 'dark' ? '&#9788;' : '&#9790;';
+  }
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang) applyLang(savedLang);
+</script>
+
+</body>
+</html>
