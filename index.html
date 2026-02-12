@@ -96,6 +96,38 @@
       border: 3px solid var(--border);
       margin-bottom: 1rem;
       transition: border-color var(--transition);
+      cursor: pointer;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+    .lightbox.active {
+      background: rgba(0,0,0,0.75);
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .lightbox img {
+      max-width: 500px;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      transform: scale(0.5);
+      opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+    .lightbox.active img {
+      transform: scale(1);
+      opacity: 1;
     }
 
     .profile-pic-placeholder {
@@ -351,7 +383,7 @@
         print-color-adjust: exact;
       }
 
-      .controls { display: none !important; }
+      .controls, .lightbox { display: none !important; }
 
       .container {
         max-width: 100%;
@@ -482,8 +514,12 @@
   <!-- Header -->
   <header class="header">
     <img class="profile-pic" src="photo.jpg" alt="Pethő Gábor"
+         onclick="document.getElementById('lightbox').classList.add('active')"
          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
     <div class="profile-pic-placeholder" style="display:none;">PG</div>
+    <div id="lightbox" class="lightbox" onclick="this.classList.remove('active')">
+      <img src="photo.jpg" alt="Pethő Gábor">
+    </div>
     <div class="header-name">
       <h1 data-i18n="name">Gabor Petho</h1>
       <div class="subtitle" data-i18n="subtitle">Robotics Team Leader | Mechatronics Engineer</div>
@@ -751,7 +787,7 @@
       lang_en: 'English',
       lang_en_lvl: 'Fluent \u2014 daily use',
       lang_de: 'German',
-      lang_de_lvl: 'Communication level',
+      lang_de_lvl: 'Communication level (passive)',
       sec_other: 'Other',
       driving: 'Driving Licence',
       online: 'This CV is available online at'
