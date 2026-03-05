@@ -99,6 +99,37 @@
       cursor: pointer;
     }
 
+    /* Profile pic hover */
+    .profile-pic-wrap {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    .profile-pic-wrap .profile-pic {
+      margin-bottom: 0;
+    }
+    .profile-pic-hover {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      padding: 0.5rem;
+    }
+    .profile-pic-wrap:hover .profile-pic-hover {
+      opacity: 1;
+    }
+
     /* Lightbox */
     .lightbox {
       position: fixed;
@@ -513,9 +544,11 @@
 
   <!-- Header -->
   <header class="header">
-    <img class="profile-pic" src="photo.jpg" alt="Pethő Gábor"
-         onclick="document.getElementById('lightbox').classList.add('active')"
-         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="profile-pic-wrap" onclick="document.getElementById('lightbox').classList.add('active')">
+      <img class="profile-pic" src="photo.jpg" alt="Pethő Gábor"
+           onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+      <span class="profile-pic-hover" data-i18n="click_enlarge">Click to enlarge</span>
+    </div>
     <div class="profile-pic-placeholder" style="display:none;">PG</div>
     <div id="lightbox" class="lightbox" onclick="this.classList.remove('active')">
       <img src="photo.jpg" alt="Pethő Gábor">
@@ -790,7 +823,8 @@
       lang_de_lvl: 'Communication level (passive)',
       sec_other: 'Other',
       driving: 'Driving Licence',
-      online: 'This CV is available online at'
+      online: 'This CV is available online at',
+      click_enlarge: 'Click to enlarge'
     },
     hu: {
       name: 'Pethő Gábor',
@@ -853,7 +887,8 @@
       lang_de_lvl: 'Középfokú (passzív)',
       sec_other: 'Egyéb',
       driving: 'Jogosítvány',
-      online: 'Ez az önéletrajz elérhető online:'
+      online: 'Ez az önéletrajz elérhető online:',
+      click_enlarge: 'Kattints a nagyításhoz'
     }
   };
 
