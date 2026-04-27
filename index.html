@@ -766,72 +766,14 @@
 </div>
 
 <script>
+  // English strings live in the HTML body and are captured at startup.
+  // To change English text, edit the HTML, not this object.
+  const i18nEn = {};
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    i18nEn[el.getAttribute('data-i18n')] = el.innerHTML;
+  });
+
   const i18n = {
-    en: {
-      name: 'Gabor Petho',
-      subtitle: 'Robotics Team Leader | Mechatronics Engineer',
-      location: 'Budapest, Hungary',
-      about: 'Engineering leader dedicated to bridging the gap between digital automation and physical manufacturing. Building functional machinery through 3D design and robotics, using full-stack development and AI to streamline complex workflows and drive efficiency on the shop floor.',
-      sec_exp: 'Work Experience',
-      exp1a_title: 'Robotics Team Leader \u2014 <span class="exp-company">Polinvent Kft.</span>',
-      exp1a_date: 'Jan 2025 \u2013 Present',
-      exp1a_1: 'Leading 15+ member multidisciplinary robotics team',
-      exp1a_2: 'R&D projects & custom equipment development',
-      exp1a_3: 'Automation of complex technological workflows',
-      exp1a_4: 'Facility infrastructure management',
-      exp1b_title: 'R&D Engineer \u2014 <span class="exp-company">Polinvent Kft.</span>',
-      exp1b_date: 'Jun 2020 \u2013 Jan 2025',
-      exp1b_1: 'IIoT development & Industry 4.0 integration',
-      exp1b_2: 'Robot programming (PDL), HMI development & peripheral integration for pick-and-place systems',
-      exp1b_3: 'Full-stack web development',
-      exp1b_4: 'Rapid prototyping & UV curing machine development',
-      exp1b_5: 'Production support & process improvements',
-      exp1b_6: 'SMT / PCB design & rework',
-      exp2_title: 'Process Engineer Specialist \u2014 <span class="exp-company">Robert Bosch Elektronika Kft.</span>',
-      exp2_date: 'Nov 2015 \u2013 May 2020',
-      exp2_1: 'New machine installation & production line relocation',
-      exp2_2: 'TPM & breakdown maintenance support',
-      exp2_3: 'SMT line segment lead',
-      exp2_4: 'Control Plan & FMEA support',
-      exp2_5: 'Performance analytics & budget monitoring',
-      exp3_title: 'Plant Engineer \u2014 <span class="exp-company">Teva Pharmaceuticals</span>',
-      exp3_date: 'Apr 2015 \u2013 Oct 2015',
-      exp3_1: 'Technician scheduling & coordination',
-      exp3_2: 'GMP-based production support',
-      exp3_3: 'TPM & maintenance control',
-      exp3_4: 'Spare parts management',
-      exp3_5: 'PLC programming & AutoCAD design',
-      exp4_title: 'Maintenance Engineer \u2014 <span class="exp-company">Hankook Tire</span>',
-      exp4_date: 'Apr 2013 \u2013 Jan 2015',
-      exp4_1: 'Electrical & mechanical machine maintenance',
-      exp4_2: 'Leading maintenance technicians (10+)',
-      exp4_3: 'New production line development',
-      exp4_4: 'PLC programming & mechanical part design',
-      exp5_title: 'Trainee \u2014 <span class="exp-company">Bosch</span>',
-      exp5_date: 'Sep 2011 \u2013 Mar 2013',
-      sec_skills: 'Skills',
-      sk_prog: 'Programming & Web',
-      sk_elec: 'Electrical & Automation',
-      sk_eng: 'Engineering & Design',
-      sk_mgmt: 'Management & Tools',
-      sec_edu: 'Education',
-      edu1_school: 'College of Dunaújváros',
-      edu1_degree: 'Tire Industry Engineer BSc',
-      edu1_topics: 'Tire industry machines, production logic, rubber analysis',
-      edu2_school: 'University of Miskolc',
-      edu2_degree: 'Mechatronics Engineer BSc',
-      edu2_topics: 'Automation, industrial communication, robotics, modelling & simulation',
-      sec_lang: 'Languages',
-      lang_en: 'English',
-      lang_en_lvl: 'Fluent \u2014 daily use',
-      lang_de: 'German',
-      lang_de_lvl: 'Communication level (passive)',
-      sec_other: 'Other',
-      driving: 'Driving Licence',
-      forklift: 'Forklift Licence',
-      online: 'This CV is available online at',
-      click_enlarge: 'Click to enlarge'
-    },
     hu: {
       name: 'Pethő Gábor',
       subtitle: 'Robotika csapatvezető | Mechatronikai mérnök',
@@ -900,7 +842,7 @@
   };
 
   function applyLang(lang) {
-    const strings = i18n[lang];
+    const strings = lang === 'en' ? i18nEn : i18n[lang];
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (strings[key] !== undefined) el.innerHTML = strings[key];
